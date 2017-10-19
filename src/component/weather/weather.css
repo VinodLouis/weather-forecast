@@ -1,0 +1,9 @@
+.header {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  flex: 1 1 0;
+  min-width:400px;
+}

@@ -1,0 +1,12 @@
+.map-fill{
+    fill:#a0e7a0;
+    stroke:#48240a;
+}
+
+#map{
+    background:transparent;
+}
+
+.selected-city{
+    fill:green;
+}
