@@ -15,6 +15,7 @@ class App extends Component {
         super();
         this.state = {
             active: false,
+            activeRight: false,
             loc:[],
             forecastData:{}
         };
@@ -37,6 +38,11 @@ class App extends Component {
 
      };
 
+     handleToggleRight = () => {
+       this.setState({activeRight: !this.state.activeRight});
+
+     };
+
 
   render() {
     return (
@@ -44,8 +50,13 @@ class App extends Component {
         <div>
 
             <Button label='Show Drawer' raised accent onClick={this.handleToggle} />
+            <Button label='Show Drawer r' raised accent onClick={this.handleToggleRight} />
                 <Drawer className="full-width" active={this.state.active} onOverlayClick={this.handleToggle}>
                   <IndiaMap></IndiaMap>
+                </Drawer>
+
+                <Drawer type="right" className="full-width" active={this.state.activeRight} onOverlayClick={this.handleToggleRight}>
+                  right
                 </Drawer>
 
                 <Weather cord={this.state.loc}></Weather>

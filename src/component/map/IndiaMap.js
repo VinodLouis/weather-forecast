@@ -61,7 +61,8 @@ class IndiaMap extends Component {
                  style={{width: '90%'}}
                  onPlaceSelected={this.placeSelected}
 
-             /></div>
+             />
+             </div>
       <div id="map"></div>
       </div>
     );
@@ -69,3 +70,4 @@ class IndiaMap extends Component {
 }
 
 export default IndiaMap;
+

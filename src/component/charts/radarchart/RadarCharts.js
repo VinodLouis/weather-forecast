@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import * as d3 from "d3";
-import {ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
+import {Radar, RadarChart, PolarGrid, Legend, PolarAngleAxis, PolarRadiusAxis} from 'recharts';
 
-class LineChart extends Component {
+class RadarChartPressure extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,25 +13,27 @@ class LineChart extends Component {
   
   render() {
     
-    const data01 = [{x: 10, y: 30}, {x: 30, y: 200}, {x: 45, y: 100}, {x: 50, y: 400}, {x: 70, y: 150}, {x: 100, y: 250}];
-    const data02 = [{x: 30, y: 20}, {x: 50, y: 180}, {x: 75, y: 240}, {x: 100, y: 100}, {x: 120, y: 190}];
+    const data = [
+    { subject: 'Math', A: 120, B: 110, fullMark: 150 },
+    { subject: 'Chinese', A: 98, B: 130, fullMark: 150 },
+    { subject: 'English', A: 86, B: 130, fullMark: 150 },
+    { subject: 'Geography', A: 99, B: 100, fullMark: 150 },
+    { subject: 'Physics', A: 85, B: 90, fullMark: 150 },
+    { subject: 'History', A: 65, B: 85, fullMark: 150 },
+];
 
     return (
-      <div id="tempChartGround">
-        <ScatterChart width={600} height={400} margin={{top: 20, right: 20, bottom: 20, left: 20}}>
-        <XAxis dataKey={'x'} name='stature' unit='cm'/>
-        <YAxis dataKey={'y'} name='weight' unit='kg'/>
-        
-        <CartesianGrid />
-        <Tooltip cursor={{strokeDasharray: '3 3'}}/>
-        <Legend/>
-        <Scatter name='A school' data={data01} fill='#8884d8' line shape="cross"/>
-        <Scatter name='B school' data={data02} fill='#82ca9d' line shape="diamond"/>
-      </ScatterChart>
-      </div>
+      <RadarChart cx={200} cy={200} outerRadius={120} width={400} height={400} data={data}>
+          <Radar name="Mike" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6}/>
+          <Radar name="Lily" dataKey="B" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6}/>
+          <PolarGrid />
+          <Legend />
+          <PolarAngleAxis dataKey="subject" />
+          <PolarRadiusAxis angle={30} domain={[0, 150]}/>
+        </RadarChart>
       
     );
   }
 }
 
-export default LineChart;
+export default RadarChartPressure;
