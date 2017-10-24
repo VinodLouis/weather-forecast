@@ -7,3 +7,12 @@
   flex: 1 1 0;
   min-width:400px;
 }
+
+.card{
+	border: 1px solid #000000;
+	margin: 0px 10px;
+}
+
+.card-wrapper{
+	margin: 0px 20px;
+}
