@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Autocomplete from 'react-google-autocomplete';
 import * as d3 from "d3";
 import './IndiaMap.css';
-
+import loc from './loc.svg';
 class IndiaMap extends Component {
   constructor(){
     super();
@@ -47,11 +47,36 @@ class IndiaMap extends Component {
 
   }
 
+  locatePos(position){
+    //let that = this;
+    this.svg.append("circle")
+      .attr("cx", position[0])
+      .attr("cy", position[1])
+      .attr("r", 0)
+      .style("stroke", "#ff0000")
+      .style("fill", "none")
+      .transition()
+          .delay(500)
+          .duration(5000)
+      .attr("r", 25)
+      .style("stroke-opacity", 0)
+      .on("end",function(){
+          d3.select(this).remove();
+      });
+      //this.locatePos(position);
+  }
+
+
+
    placeSelected = (place) => {
        let loc = [place.geometry.location.lng(),place.geometry.location.lat()];
        let cntProjection = this.projection(loc);
        d3.selectAll(".selected-city").remove();
-       let circle = this.svg.append("circle").attr("class","selected-city").attr("cx",cntProjection[0]).attr("cy",cntProjection[1]).attr("r",2);
+       let tm = setInterval(()=>{
+        this.locatePos(cntProjection); 
+        },500); 
+       
+       //let circle = this.svg.append("circle").attr("class","selected-city").attr("cx",cntProjection[0]).attr("cy",cntProjection[1]).attr("r",2);
    };
 
   render() {

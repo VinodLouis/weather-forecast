@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './weather.css';
+import CarouselDay from './CarouselDay.js'
 import LineChartTem from '../charts/linechart/LineChart.js'
 import RadarChartPressure from '../charts/radarchart/RadarCharts.js'
 import AreaChartHumidity from '../charts/areachart/AreaChart.js'
@@ -35,29 +36,46 @@ class Weather extends Component {
 
 
   render() {
+
      let settings = {
       arrows:true,
+      dots:true,
       adaptiveHeight:true,
       autoplay:true,
       infinite: true,
       pauseOnHover:true,
       speed: 500,
       slidesToShow: 4,
-      slidesToScroll: 1
+      slidesToScroll: 4
     };
+
+    let weatherSliderData = [];
+    this.state.weatherData.list.forEach((day)=>{
+      let objTemp = day.weather[0];
+      objTemp.dt = day.dt;
+      objTemp.speed = day.speed;
+      objTemp.deg = day.deg;
+        weatherSliderData.push(objTemp);
+    });
+
+    console.log(weatherSliderData,this.state.weatherData);
+
     return (
       <div className="header">
         <div className="item">
           <div className="card-wrapper">
           <Slider {...settings}>
-        <div className="card"><h3>1</h3><h3>1</h3><h3>1</h3><h3>1</h3></div>
-        <div className="card"><h3>2</h3><h3>2</h3><h3>2</h3><h3>2</h3></div>
-        <div className="card"><h3>3</h3><h3>3</h3><h3>3</h3><h3>3</h3></div>
-        <div className="card"><h3>4</h3><h3>4</h3><h3>4</h3><h3>4</h3></div>
-        <div className="card"><h3>5</h3><h3>5</h3><h3>5</h3><h3>5</h3></div>
-        <div className="card"><h3>6</h3><h3>6</h3><h3>6</h3><h3>6</h3></div>
+           {weatherSliderData.map((slide, index) => (
+              <div className="card" data-index={index} key={index}>
+                <CarouselDay day={slide}></CarouselDay>
+              </div>
+            ))
+           }
+        
+        
       </Slider>
           </div>
+          <br/><br/>
           <div>
             
             <AreaChartHumidity area={this.state.weatherData.list}></AreaChartHumidity>      
