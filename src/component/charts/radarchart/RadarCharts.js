@@ -18,10 +18,10 @@ class RadarChartPressure extends Component {
   componentDidMount(){
     this.setState({
                       width:this.myInput.offsetWidth * 0.90,
-                      height:this.myInput.offsetWidth * 0.40,
+                      height:this.myInput.offsetWidth * 0.50,
                       cx:this.myInput.offsetWidth/2,
-                      cy:(this.myInput.offsetWidth * 0.40)/2,
-                      or:(this.myInput.offsetWidth * 0.40) * 0.35  
+                      cy:(this.myInput.offsetWidth * 0.50)/2,
+                      or:(this.myInput.offsetWidth * 0.50) * 0.35  
                   });
   }
 
@@ -33,28 +33,56 @@ class RadarChartPressure extends Component {
 
   
   render() {
-    let data_chart = [];
-
-
+    let dataDayWise = []
     this.state.data.forEach((el)=>{
-      data_chart.push({
-        dt : d3.timeFormat("%d %b")(el.dt * 1000),
-        humidity : el.humidity,
-        cloud : el.clouds
-      });  
+      if(dataDayWise.length == 0 || dataDayWise[dataDayWise.length-1].date != el.dt_txt.split(" ")[0]){
+        dataDayWise.push({
+          date : el.dt_txt.split(" ")[0],
+          value : [el]
+        })
+      }else{
+        dataDayWise[dataDayWise.length-1].value.push(el);
+      }
     });
+  
 
+    let data_chart = [];
+    let minP = 9999999;
+    let maxP = 0;  
+
+    dataDayWise.forEach((el)=>{
+      if(el.value.length > 2){
+        data_chart.push({
+          dt : d3.timeFormat("%d %b %I %p")(el.value[0].dt * 1000),
+          sea_pressure : el.value[0].main.sea_level,
+          ground_pressure : el.value[0].main.grnd_level
+        });
+
+        minP = Math.min(el.value[0].main.sea_level,el.value[0].main.grnd_level) < minP ? Math.min(el.value[0].main.sea_level,el.value[0].main.grnd_level) : minP;
+        maxP = Math.max(el.value[0].main.sea_level,el.value[0].main.grnd_level) > maxP ? Math.max(el.value[0].main.sea_level,el.value[0].main.grnd_level) : maxP;   
+      }
+      data_chart.push({
+        dt : d3.timeFormat("%d %b %I %p")(el.value[el.value.length-1].dt * 1000),
+        sea_pressure : el.value[el.value.length-1].main.sea_level,
+        ground_pressure : el.value[el.value.length-1].main.grnd_level
+      });
+      minP = Math.min(el.value[el.value.length-1].main.sea_level,el.value[el.value.length-1].main.grnd_level) < minP ? Math.min(el.value[el.value.length-1].main.sea_level,el.value[el.value.length-1].main.grnd_level) : minP;
+      maxP = Math.max(el.value[el.value.length-1].main.sea_level,el.value[el.value.length-1].main.grnd_level) > maxP ? Math.max(el.value[el.value.length-1].main.sea_level,el.value[el.value.length-1].main.grnd_level) : maxP;   
+        
+    });
+    console.log('dataForecast',dataDayWise,data_chart,minP,maxP);  
     return (
       <div ref={input => {this.myInput = input}}>
       <RadarChart cx={this.state.cx} cy={this.state.cy} outerRadius={this.state.or} width={this.state.width} height={this.state.height} data={data_chart}>
-          <Radar name="Humidity" dataKey="humidity" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6}/>
-          <Radar name="Cloudy" dataKey="cloud" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6}/>
+          <Radar name="Sea" dataKey="sea_pressure" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6}/>
+          <Radar name="Ground" dataKey="ground_pressure" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6}/>
           <PolarGrid />
           <Tooltip/>
           <Legend />
           <PolarAngleAxis dataKey="dt" />
-          <PolarRadiusAxis angle={40} domain={[0, 100]}/>
+          <PolarRadiusAxis angle={45} domain={[minP-50, maxP+50]}/>
         </RadarChart>
+        <div className="title">Variation of Humidity vs Cloudy</div>
       </div>
     );
   }

@@ -30,3 +30,18 @@
 .full-width{
     width:auto;
 }
+
+.title{
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.dr-lf{
+  right: 0;
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  cursor:pointer;
+  background-color: #ffc658;
+}

@@ -5,7 +5,7 @@
 
 .item {
   flex: 1 1 0;
-  min-width:400px;
+  min-width:300px;
 }
 
 .card{
@@ -19,4 +19,38 @@
 
 .slick-prev:before, .slick-next:before{
 	color:#8884d8 !important;
+}
+
+.weather-day-wrapper{
+	text-align: center;
+	background-color: #fafafa;
+	padding:10px 0px;
+}
+
+.bisector{
+	width: 250px;
+	background-color: #b3b3b3;
+}
+
+.dt{
+	font-size: 18px;
+	font-weight: bolder;
+}
+
+.img-ds{
+	width: 50px;
+	margin: auto;
+}
+
+.main-w{
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.desc-w{
+	font-size: 14px;
+}
+
+.oth-w{
+	font-size: 12px
 }

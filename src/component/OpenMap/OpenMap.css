@@ -1,0 +1,18 @@
+#openMap{
+	height:calc(100vh - 40px);
+	width:800px;
+	min-height: 400px;
+}
+
+.war{
+	color:#ff0000;
+}
+
+.cl-mp{
+	position: fixed;
+	right: 5px;
+	cursor: pointer;
+	color:#c80900;
+	background-color:#ffc47c;
+	padding:2px;
+}

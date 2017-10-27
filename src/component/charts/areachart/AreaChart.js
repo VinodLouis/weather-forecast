@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as d3 from "d3";
-import {AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip} from 'recharts';
+import {AreaChart, Legend,  Area, XAxis, YAxis, CartesianGrid, Tooltip} from 'recharts';
 
 class AreaChartHumidity extends Component {
   constructor(props) {
@@ -26,28 +26,28 @@ class AreaChartHumidity extends Component {
   
   render() {
     let data_chart = [];
-    let minValue = 99999;
-    let maxValue = 0;
 
     this.state.data.forEach((el)=>{
       data_chart.push({
         dt : d3.timeFormat("%d %b")(el.dt * 1000),
-        pressure : el.pressure
-      });
-      minValue = (el.pressure < minValue) ? el.pressure : minValue;
-      maxValue = (el.pressure > maxValue) ? el.pressure : maxValue;  
+        humidity : el.main.humidity,
+        cloudy :  el.clouds.all 
+      });  
     });
 
     return (
       <div ref={input => {this.myInput = input}}>
       <AreaChart width={this.state.width} height={this.state.height} data={data_chart}
-            margin={{top: 10, right: 30, left: 0, bottom: 0}}>
+            margin={{top: 5, right: 30, left: 20, bottom: 5}}>
         <XAxis dataKey="dt"/>
-        <YAxis domain={[Math.floor(minValue), Math.ceil(maxValue)]}/>
+        <YAxis domain={[0, 100]}/>
         <CartesianGrid strokeDasharray="3 3"/>
         <Tooltip/>
-        <Area type='monotone' dataKey='pressure' stroke='#8884d8' fill='#8884d8' />
+        <Legend />
+        <Area name="Humidity" type='monotone' dataKey='humidity' stroke='#8884d8' fill='#8884d8' />
+        <Area name="Clouds" type='monotone' dataKey='cloudy' stroke='#82ca9d' fill='#82ca9d' />
       </AreaChart>
+      <div className="title">Pressure variation day wise in (hPa)</div>
       </div>
     );
   }
