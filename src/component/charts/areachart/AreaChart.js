@@ -47,7 +47,7 @@ class AreaChartHumidity extends Component {
         <Area name="Humidity" type='monotone' dataKey='humidity' stroke='#8884d8' fill='#8884d8' />
         <Area name="Clouds" type='monotone' dataKey='cloudy' stroke='#82ca9d' fill='#82ca9d' />
       </AreaChart>
-      <div className="title">Pressure variation day wise in (hPa)</div>
+      <div className="title">Variation of humidity Vs clouds in (%)</div>
       </div>
     );
   }

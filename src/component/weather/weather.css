@@ -54,3 +54,39 @@
 .oth-w{
 	font-size: 12px
 }
+
+.load{
+	text-align: center;
+}
+
+.city{
+	color:#6961ff;
+	font-size: 22px;
+	padding: 5px 0px;
+	font-weight: bold;
+}
+
+.bubble{
+	padding:0px 10px;
+	font-family: monospace;
+	cursor: pointer;
+	background-color:#6961ff;
+	color: #ffffff;
+	border-radius: 100%; 
+}
+
+.dgc{
+	overflow: auto;
+	font-size: 14px
+}
+
+.dgc > p{
+	color:#000000;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.dgc > hr{
+	width:250px;
+	background-color:#e5e5e5; 
+}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as d3 from "d3";
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 
-class LineChartTem extends Component {
+class LineChartTemp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -64,7 +64,7 @@ class LineChartTem extends Component {
     
     return (
       <div ref={input => {this.myInput = input}}>
-      <div className="title"> Temperature variation day wise & time wise in (&#8490;)</div>
+      <div className="title"> Variation of Temperature time wise min Vs max in (&#8490;)</div>
       <LineChart width={this.state.width} height={this.state.height} data={data_chart}
             margin={{top: 5, right: 30, left: 20, bottom: 5}}>
        <XAxis dataKey="dt"/>
@@ -82,4 +82,4 @@ class LineChartTem extends Component {
   }
 }
 
-export default LineChartTem;
+export default LineChartTemp;

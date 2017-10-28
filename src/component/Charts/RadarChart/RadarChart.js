@@ -74,15 +74,15 @@ class RadarChartPressure extends Component {
     return (
       <div ref={input => {this.myInput = input}}>
       <RadarChart cx={this.state.cx} cy={this.state.cy} outerRadius={this.state.or} width={this.state.width} height={this.state.height} data={data_chart}>
-          <Radar name="Sea" dataKey="sea_pressure" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6}/>
-          <Radar name="Ground" dataKey="ground_pressure" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6}/>
+          <Radar name="Sea" dataKey="sea_pressure" stroke="#8884d8" fill="#8884d8" fillOpacity={0.5}/>
+          <Radar name="Ground" dataKey="ground_pressure" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.5}/>
           <PolarGrid />
           <Tooltip/>
           <Legend />
           <PolarAngleAxis dataKey="dt" />
           <PolarRadiusAxis angle={45} domain={[minP-50, maxP+50]}/>
         </RadarChart>
-        <div className="title">Variation of Humidity vs Cloudy</div>
+        <div className="title">Variation of Pressure sea Vs ground level in (hPa)</div>
       </div>
     );
   }

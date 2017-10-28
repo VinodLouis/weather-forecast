@@ -7,6 +7,7 @@ class OpenMap extends Component {
     super(props);
     this.map = null;
     this.closeDrawer = this.closeDrawer.bind(this);
+    this.placeSelected = this.placeSelected.bind(this);
   }
   componentDidMount() {
       //console.log(d3);
@@ -37,7 +38,7 @@ class OpenMap extends Component {
     			appId: OWM_API_KEY});
     let station = window.L.OWM.current({type: 'station', intervall: 15, imageLoadingUrl: 'maps/owmloading.gif', lang: "en",
             appId: OWM_API_KEY /* , markerFunction: myOwmMarker, popupFunction: myOwmPopup */ });
-    let zoom = 6;
+    let zoom = 10;
     let lat = this.props.cord[0];
     let lon = this.props.cord[1];
 
@@ -87,8 +88,18 @@ class OpenMap extends Component {
 
   }
 
-  placeSelected = (place) => {
-       let loc = [place.geometry.location.lng(),place.geometry.location.lat()];       
+  placeSelected(place){
+       let loc = {
+        status:"success",
+        data:{
+            coords : {
+                latitude:place.geometry.location.lat(),
+                longitude:place.geometry.location.lng()
+            }
+        }
+       }
+       this.map.setView(new window.L.LatLng(place.geometry.location.lat(), place.geometry.location.lng()), 10);
+       this.props.cordchange(loc);
   };
 
   closeDrawer(){
@@ -100,7 +111,7 @@ class OpenMap extends Component {
         <div>
             <div className="cl-mp" onClick={this.closeDrawer}>Close(X)</div>
             <Autocomplete
-                 style={{width: '90%'}}
+                 style={{width: '50%'}}
                  onPlaceSelected={this.placeSelected}
 
              />

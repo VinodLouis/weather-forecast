@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Autocomplete from 'react-google-autocomplete';
 import * as d3 from "d3";
-import './IndiaMap.css';
+import './WorldMap.css';
 import loc from './loc.svg';
-class IndiaMap extends Component {
+class WorldMap extends Component {
   constructor(){
     super();
     this.svg = null;
@@ -94,5 +94,5 @@ class IndiaMap extends Component {
   }
 }
 
-export default IndiaMap;
+export default WorldMap;
 

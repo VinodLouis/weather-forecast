@@ -9,6 +9,7 @@
     "react-dom": "^16.0.0",
     "react-drawer": "^1.2.5",
     "react-google-autocomplete": "^1.0.15",
+    "react-modal": "^3.1.0",
     "react-scripts": "1.0.14",
     "react-slick": "^0.15.4",
     "react-toolbox": "^2.0.0-beta.12",
@@ -27,7 +28,8 @@
     "include": [
       "BUTTON",
       "DATE_PICKER",
-      "DRAWER"
+      "DRAWER",
+      "DIALOG"
     ],
     "customProperties": {
       "animation-duration": "0.3s",
