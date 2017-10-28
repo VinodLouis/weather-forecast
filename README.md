@@ -44,7 +44,7 @@ It represents the Humidity Vs Clouds for different time intervals on each day in
 ```
 
 Map View :
-![Map view layers1](https://raw.githubusercontent.com/VinodLouis/weather-forecast/master/screenshots/ma1.png)
+![Map view layers1](https://raw.githubusercontent.com/VinodLouis/weather-forecast/master/screenshots/map1.png)
 ![Map view layers2](https://raw.githubusercontent.com/VinodLouis/weather-forecast/master/screenshots/map2.png)
 ![Map view places](https://raw.githubusercontent.com/VinodLouis/weather-forecast/master/screenshots/map3.png)
 
