@@ -25,7 +25,7 @@ Introduction :
 ```
 
 Charts View :
-![Aggregation view]()
+![Aggregation view](https://raw.githubusercontent.com/VinodLouis/weather-forecast/master/screenshots/agg.png)
 
 ```
 Charts View :
@@ -44,11 +44,9 @@ It represents the Humidity Vs Clouds for different time intervals on each day in
 ```
 
 Map View :
-![Map view layers1]()
-![Map view layers2]()
-![Map view layers3]()
-![Map view places]()
-
+![Map view layers1](https://raw.githubusercontent.com/VinodLouis/weather-forecast/master/screenshots/ma1.png)
+![Map view layers2](https://raw.githubusercontent.com/VinodLouis/weather-forecast/master/screenshots/map2.png)
+![Map view places](https://raw.githubusercontent.com/VinodLouis/weather-forecast/master/screenshots/map3.png)
 
 ```
 Map View :
