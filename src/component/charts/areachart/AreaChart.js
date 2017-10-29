@@ -29,7 +29,7 @@ class AreaChartHumidity extends Component {
 
     this.state.data.forEach((el)=>{
       data_chart.push({
-        dt : d3.timeFormat("%d %b")(el.dt * 1000),
+        dt : d3.timeFormat("%d %b %I %p")(el.dt * 1000),
         humidity : el.main.humidity,
         cloudy :  el.clouds.all 
       });  
