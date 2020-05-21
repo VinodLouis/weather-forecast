@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Autocomplete from 'react-google-autocomplete';
 import './OpenMap.css';
+import { set } from 'd3';
 
 class OpenMap extends Component {
   constructor(props){
@@ -38,10 +39,10 @@ class OpenMap extends Component {
     			appId: OWM_API_KEY});
     let station = window.L.OWM.current({type: 'station', intervall: 15, imageLoadingUrl: 'maps/owmloading.gif', lang: "en",
             appId: OWM_API_KEY /* , markerFunction: myOwmMarker, popupFunction: myOwmPopup */ });
-    let zoom = 10;
+    let zoom = this.props.mapDetail.zoom ? this.props.mapDetail.zoom : 10;
     let lat = this.props.cord[0];
     let lon = this.props.cord[1];
-
+    //debugger; 
     this.map = window.L.map('openMap', {
         center: new window.L.LatLng(lat, lon), zoom: zoom,
         layers: [standard]
@@ -71,7 +72,7 @@ class OpenMap extends Component {
 
     let layerControl = window.L.control.layers(baseMaps, overlayMaps, {collapsed: false}).addTo(this.map);
     //this.map.addControl(new window.L.Control.Permalink({layers: layerControl, useAnchor: false, position: 'bottomright'}));
-
+     //debugger;
      // patch layerControl to add some titles
      	let patch = window.L.DomUtil.create('div', 'owm-layercontrol-header');
      	patch.innerHTML = 'TileLayers';
@@ -85,7 +86,17 @@ class OpenMap extends Component {
      	patch.innerHTML = 'Maps';
      	layerControl._form.children[0].parentNode.insertBefore(patch, layerControl._form.children[0]);
 
-
+      setTimeout(()=>{
+        if(this.props.mapDetail.selected){
+          let layer =     document.getElementsByClassName("leaflet-control-layers-overlays")[0];
+          this.props.mapDetail.selected.split("").forEach(op=>{
+            op = parseInt(op,10);
+            if(layer.children[op] && layer.children[op].firstElementChild && layer.children[op].firstElementChild.type == "checkbox"){
+              layer.children[op].firstElementChild.click();
+            }
+          })
+        }
+      },100);
   }
 
   placeSelected(place){
@@ -98,6 +109,7 @@ class OpenMap extends Component {
             }
         }
        }
+       
        this.map.setView(new window.L.LatLng(place.geometry.location.lat(), place.geometry.location.lng()), 10);
        this.props.cordchange(loc);
   };

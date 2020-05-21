@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Autocomplete from 'react-google-autocomplete';
 import Dialog from 'react-toolbox/lib/dialog/Dialog';
-import './Weather.css';
+import './weather.css';
 import CarouselDay from './CarouselDay.js'
-import LineChartTemp from '../Charts/LineChart/LineChart.js'
+import LineChartTemp from '../Charts/linechart/LineChart.js'
 import RadarChartPressure from '../Charts/RadarChart/RadarChart.js'
-import AreaChartHumidity from '../Charts/AreaChart/AreaChart.js'
+import AreaChartHumidity from '../Charts/areachart/AreaChart.js'
 import Slider from  'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

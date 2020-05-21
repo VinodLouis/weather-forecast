@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Location from './component/Location/Location.js'
-import Weather from './component/Weather/Weather.js'
+import Location from './component/location/location.js'
+import Weather from './component/weather/weather.js'
 import OpenMap from './component/OpenMap/OpenMap.js'
 import './assets/react-toolbox/theme.css';
 import theme from './assets/react-toolbox/theme.js';
@@ -15,14 +15,42 @@ class App extends Component {
     this.state = {
       activeRight: false,
       loc:[],
-      forecastData:{}
+      forecastData:{},
+      mapDetails:{},
     };
     this.locationChanged = this.locationChanged.bind(this);
     this.closeDrawerRight = this.closeDrawerRight.bind(this);
   }
 
   componentDidMount(){
-    Location.getLocation(this.locationChanged);
+    let cor = this.getParams(window.location.search);
+   
+    if( cor && cor.lat && cor.lon){
+      this.setState({loc:[cor.lat,cor.lon]});
+    }else{
+      Location.getLocation(this.locationChanged);  
+    }
+    if(cor.map){
+      this.setState({activeRight:true});
+    }
+    if(cor.zoom){
+      if(cor.selected){
+        this.setState({mapDetails:{zoom:cor.zoom,selected:cor.selected}});
+      }
+    }
+  }
+
+  getParams(query){
+    return query
+        ? (/^[?#]/.test(query) ? query.slice(1) : query)
+            .split('&')
+            .reduce((params, param) => {
+                    let [key, value] = param.split('=');
+                    params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
+                    return params;
+                }, {}
+            )
+        : {}
   }
 
   locationChanged(data){
@@ -46,7 +74,7 @@ class App extends Component {
         <div>
           <img className="dr-lf" src={world} onClick={this.handleToggleRight}/>  
           <Drawer type="right" className="full-width" active={this.state.activeRight} onOverlayClick={this.handleToggleRight}>
-            <OpenMap cordchange={this.locationChanged} cord={this.state.loc} drawerclose={this.closeDrawerRight}></OpenMap>
+            <OpenMap cordchange={this.locationChanged} cord={this.state.loc} mapDetail={this.state.mapDetails} drawerclose={this.closeDrawerRight}></OpenMap>
           </Drawer>
           <Weather cordchange={this.locationChanged} cord={this.state.loc}></Weather>
           <br/><br/>
